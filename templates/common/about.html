@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <h1>About</h1>
+    <p>Budgetly keeps income, expenses, savings and investments for each month on their own.</p>
+
+    <h2 class="h4 mt-4">Categories</h2>
+    <ul>
+        <li>Income is money coming in.</li>
+        <li>Expenses is money spent.</li>
+        <li>Savings is money set aside.</li>
+        <li>Investments is money put to work.</li>
+    </ul>
+
+    <h2 class="h4 mt-4">Totals</h2>
+    <p>Net is income minus expenses, savings and investments.</p>
+    <p>The savings rate is savings plus investments, divided by income. When income is 0, the rate is shown as a dash.</p>
+
+    <h2 class="h4 mt-4">Amounts</h2>
+    <p>Every entry is a positive amount. The category decides whether the money came in or went out.</p>
+{% endblock %}

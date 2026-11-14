@@ -53,7 +53,9 @@ DJANGO_APPS = [
 ]
 
 # Add project apps here
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "common",
+]
 
 # Django apps, then local apps
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
