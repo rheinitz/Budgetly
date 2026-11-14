@@ -55,6 +55,7 @@ DJANGO_APPS = [
 # Add project apps here
 LOCAL_APPS = [
     "common",
+    "categories",
 ]
 
 # Django apps, then local apps
