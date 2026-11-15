@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ subcategory.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ subcategory.name }}</h1>
+    <p>
+        <span class="badge text-bg-{{ subcategory.category_choice.badge_color }}">
+            {{ subcategory.get_category_display }}
+        </span>
+    </p>
+    <dl>
+        <dt>Category</dt>
+        <dd>{{ subcategory.get_category_display }}</dd>
+        <dt>Name</dt>
+        <dd>{{ subcategory.name }}</dd>
+        <dt>Created</dt>
+        <dd>{{ subcategory.created_at|date:"d M Y, H:i" }}</dd>
+        <dt>Updated</dt>
+        <dd>{{ subcategory.updated_at|date:"d M Y, H:i" }}</dd>
+    </dl>
+    <a class="btn btn-primary" href="{% url 'categories:edit' subcategory.pk %}">Edit</a>
+    <a class="btn btn-outline-danger" href="{% url 'categories:delete' subcategory.pk %}">Delete</a>
+{% endblock %}

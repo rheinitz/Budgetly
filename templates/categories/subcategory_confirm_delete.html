@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Delete {{ subcategory.name }}{% endblock %}
+
+{% block content %}
+    <h1>Delete {{ subcategory.name }}</h1>
+    <p>This subcategory will be removed.</p>
+    <form method="post">
+        {% csrf_token %}
+        {% include "partials/form_fields.html" %}
+        <button class="btn btn-danger" type="submit">Delete</button>
+        <a href="{{ subcategory.get_absolute_url }}">Cancel</a>
+    </form>
+{% endblock %}
