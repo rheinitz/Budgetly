@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tag.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ tag.name }}</h1>
+    <p>
+        <span class="badge text-bg-{{ tag.color }}">{{ tag.get_color_display }}</span>
+    </p>
+    <dl>
+        <dt>Name</dt>
+        <dd>{{ tag.name }}</dd>
+        <dt>Color</dt>
+        <dd>{{ tag.get_color_display }}</dd>
+        <dt>Created</dt>
+        <dd>{{ tag.created_at|date:"d M Y, H:i" }}</dd>
+        <dt>Updated</dt>
+        <dd>{{ tag.updated_at|date:"d M Y, H:i" }}</dd>
+    </dl>
+    <a class="btn btn-primary" href="{% url 'tags:edit' tag.pk %}">Edit</a>
+    <a class="btn btn-outline-danger" href="{% url 'tags:delete' tag.pk %}">Delete</a>
+{% endblock %}

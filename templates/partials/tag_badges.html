@@ -1,0 +1,7 @@
+{% if tags %}
+    {% for tag in tags %}
+        <a class="badge text-bg-{{ tag.color }}" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+    {% endfor %}
+{% elif tag %}
+    <a class="badge text-bg-{{ tag.color }}" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+{% endif %}

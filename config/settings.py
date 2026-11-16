@@ -56,6 +56,7 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     "common",
     "categories",
+    "tags",
 ]
 
 # Django apps, then local apps

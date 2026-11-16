@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Delete {{ tag.name }}{% endblock %}
+
+{% block content %}
+    <h1>Delete {{ tag.name }}</h1>
+    <p>Entries that use this tag will keep existing. They only lose this tag.</p>
+    <form method="post">
+        {% csrf_token %}
+        {% include "partials/form_fields.html" %}
+        <button class="btn btn-danger" type="submit">Delete</button>
+        <a href="{{ tag.get_absolute_url }}">Cancel</a>
+    </form>
+{% endblock %}

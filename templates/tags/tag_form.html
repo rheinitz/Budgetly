@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit tag{% else %}Add tag{% endif %}{% endblock %}
+
+{% block content %}
+    <h1>{% if object %}Edit tag{% else %}Add tag{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% include "partials/form_fields.html" %}
+        <button class="btn btn-primary" type="submit">Save</button>
+        {% if object %}
+            <a href="{{ object.get_absolute_url }}">Cancel</a>
+        {% else %}
+            <a href="{% url 'tags:list' %}">Cancel</a>
+        {% endif %}
+    </form>
+{% endblock %}
