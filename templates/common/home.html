@@ -3,14 +3,53 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>Budgie</h1>
-    <p>Track income, expenses, savings and investments, one month at a time.</p>
+    <section class="hero">
+        <p class="hero-kicker">Monthly budget tracker</p>
+        <h1 class="hero-title glitch">Budgie</h1>
+        <p class="hero-lead">Track income, expenses, savings and investments, one month at a time.</p>
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary btn-lg" href="{% url 'entries:add' %}">Add entry</a>
+            <a class="btn btn-outline-info btn-lg" href="{% url 'entries:current' %}">This month</a>
+        </div>
+    </section>
 
-    <h2 class="h4 mt-4">Getting started</h2>
-    <ol>
-        <li><a href="{% url 'categories:list' %}">Create subcategories.</a></li>
-        <li><a href="{% url 'tags:list' %}">Create tags (optional).</a></li>
-        <li><a href="{% url 'entries:add' %}">Add entries.</a></li>
-        <li><a href="{% url 'entries:current' %}">Review the month.</a></li>
-    </ol>
+    <h2 class="h5 section-title mb-3">Getting started</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+        <div class="col">
+            <a class="card page-card step-card h-100" href="{% url 'categories:list' %}">
+                <div class="card-body">
+                    <span class="step-number">01</span>
+                    <p class="step-title">Create subcategories.</p>
+                    <p class="step-text">Salary, Food, ETF... each one sits in one of the four categories.</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="card page-card step-card h-100" href="{% url 'tags:list' %}">
+                <div class="card-body">
+                    <span class="step-number">02</span>
+                    <p class="step-title">Create tags (optional).</p>
+                    <p class="step-text">Group entries across categories, for example a trip.</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="card page-card step-card h-100" href="{% url 'entries:add' %}">
+                <div class="card-body">
+                    <span class="step-number">03</span>
+                    <p class="step-title">Add entries.</p>
+                    <p class="step-text">Amounts are always positive; the category decides how they count.</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="card page-card step-card h-100" href="{% url 'entries:current' %}">
+                <div class="card-body">
+                    <span class="step-number">04</span>
+                    <p class="step-title">Review the month.</p>
+                    <p class="step-text">Totals, net and savings rate for the current month.</p>
+                </div>
+            </a>
+        </div>
+    </div>
 {% endblock %}

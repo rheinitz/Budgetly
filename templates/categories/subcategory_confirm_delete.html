@@ -8,17 +8,25 @@
         <div class="alert alert-danger">{{ delete_error }}</div>
     {% endif %}
     {% if has_entries %}
-        <div class="alert alert-warning">This subcategory has entries, so it cannot be deleted.</div>
-        <p><a href="{{ subcategory.get_absolute_url }}">View its entries</a></p>
+        <div class="alert alert-warning">
+            This subcategory has entries, so it cannot be deleted.
+            <a href="{{ subcategory.get_absolute_url }}">View its entries</a>
+        </div>
     {% else %}
-        <p>This subcategory will be removed.</p>
+        <div class="alert alert-danger">This subcategory will be removed.</div>
     {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        {% include "partials/form_fields.html" %}
-        {% if not has_entries %}
-            <button class="btn btn-danger" type="submit">Delete</button>
-        {% endif %}
-        <a href="{{ subcategory.get_absolute_url }}">Cancel</a>
-    </form>
+    <section class="card page-card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {% include "partials/form_fields.html" %}
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                    {% if not has_entries %}
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    {% endif %}
+                    <a href="{{ subcategory.get_absolute_url }}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </section>
 {% endblock %}

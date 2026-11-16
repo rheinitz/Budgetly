@@ -8,24 +8,30 @@
     <p>
         <span class="badge text-bg-{{ entry.category.badge_color }}">{{ entry.category.label }}</span>
     </p>
-    <dl>
-        <dt>Amount</dt>
-        <dd class="amount">{{ entry.amount|money }}</dd>
-        <dt>Subcategory</dt>
-        <dd><a href="{{ entry.subcategory.get_absolute_url }}">{{ entry.subcategory.name }}</a></dd>
-        <dt>Description</dt>
-        <dd>{{ entry.description|capfirst|default:"-" }}</dd>
-        <dt>Tags</dt>
-        <dd>
-            {{ entry.tags.all|join:", "|default:"-" }}
-            {% include "partials/tag_badges.html" with tags=entry.tags.all %}
-        </dd>
-        <dt>Created</dt>
-        <dd>{{ entry.created_at|date:"d M Y, H:i" }}</dd>
-        <dt>Updated</dt>
-        <dd>{{ entry.updated_at|date:"d M Y, H:i" }}</dd>
-    </dl>
-    <a class="btn btn-primary" href="{% url 'entries:edit' entry.pk %}">Edit</a>
-    <a class="btn btn-outline-danger" href="{% url 'entries:delete' entry.pk %}">Delete</a>
-    <a href="{{ entry.get_month_url }}">Back to {{ entry.date|date:"F Y" }}</a>
+    <section class="card page-card mb-3">
+        <div class="card-body">
+            <dl class="detail-list">
+                <dt>Amount</dt>
+                <dd class="amount">{{ entry.amount|money }}</dd>
+                <dt>Subcategory</dt>
+                <dd><a href="{{ entry.subcategory.get_absolute_url }}">{{ entry.subcategory.name }}</a></dd>
+                <dt>Description</dt>
+                <dd>{{ entry.description|capfirst|default:"-" }}</dd>
+                <dt>Tags</dt>
+                <dd>
+                    {{ entry.tags.all|join:", "|default:"-" }}
+                    {% include "partials/tag_badges.html" with tags=entry.tags.all %}
+                </dd>
+                <dt>Created</dt>
+                <dd>{{ entry.created_at|date:"d M Y, H:i" }}</dd>
+                <dt>Updated</dt>
+                <dd>{{ entry.updated_at|date:"d M Y, H:i" }}</dd>
+            </dl>
+        </div>
+    </section>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <a class="btn btn-primary" href="{% url 'entries:edit' entry.pk %}">Edit</a>
+        <a class="btn btn-outline-danger" href="{% url 'entries:delete' entry.pk %}">Delete</a>
+        <a class="ms-2" href="{{ entry.get_month_url }}">Back to {{ entry.date|date:"F Y" }}</a>
+    </div>
 {% endblock %}

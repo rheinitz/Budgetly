@@ -2,7 +2,7 @@
 
 <div class="row row-cols-2 row-cols-lg-3 g-3 mb-3">
     <div class="col">
-        <section class="card page-card h-100">
+        <section class="card page-card stat-card stat-income h-100">
             <div class="card-body">
                 <span class="badge text-bg-success">Income</span>
                 <div class="amount mt-2">{{ totals.income|money }}</div>
@@ -10,7 +10,7 @@
         </section>
     </div>
     <div class="col">
-        <section class="card page-card h-100">
+        <section class="card page-card stat-card stat-expenses h-100">
             <div class="card-body">
                 <span class="badge text-bg-danger">Expenses</span>
                 <div class="amount mt-2">{{ totals.expenses|money }}</div>
@@ -18,7 +18,7 @@
         </section>
     </div>
     <div class="col">
-        <section class="card page-card h-100">
+        <section class="card page-card stat-card stat-savings h-100">
             <div class="card-body">
                 <span class="badge text-bg-primary">Savings</span>
                 <div class="amount mt-2">{{ totals.savings|money }}</div>
@@ -26,7 +26,7 @@
         </section>
     </div>
     <div class="col">
-        <section class="card page-card h-100">
+        <section class="card page-card stat-card stat-investments h-100">
             <div class="card-body">
                 <span class="badge text-bg-info">Investments</span>
                 <div class="amount mt-2">{{ totals.investments|money }}</div>
@@ -34,7 +34,7 @@
         </section>
     </div>
     <div class="col">
-        <section class="card page-card h-100">
+        <section class="card page-card stat-card stat-net h-100">
             <div class="card-body">
                 <span class="badge text-bg-secondary">Net</span>
                 <div class="amount mt-2{% if totals.net < 0 %} amount-negative{% endif %}">{{ totals.net|money }}</div>
@@ -42,9 +42,9 @@
         </section>
     </div>
     <div class="col">
-        <section class="card page-card h-100">
+        <section class="card page-card stat-card stat-rate h-100">
             <div class="card-body">
-                <span class="badge text-bg-secondary">Savings rate</span>
+                <span class="badge text-bg-warning">Savings rate</span>
                 <div class="amount mt-2">
                     {% if totals.savings_rate is not None %}
                         {{ totals.savings_rate }}%
@@ -57,7 +57,7 @@
     </div>
 </div>
 <p class="text-body-secondary small mb-2">How income was allocated</p>
-<div class="progress mb-3">
+<div class="progress mb-4">
     <div class="progress-bar bg-danger" style="width: {% widthratio totals.expenses totals.income 100 %}%"></div>
     <div class="progress-bar bg-primary" style="width: {% widthratio totals.savings totals.income 100 %}%"></div>
     <div class="progress-bar bg-info" style="width: {% widthratio totals.investments totals.income 100 %}%"></div>

@@ -5,38 +5,42 @@
 {% block content %}
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <h1 class="mb-0">Tags</h1>
-        <a href="{% url 'tags:add' %}">Add tag</a>
+        <a class="btn btn-outline-secondary" href="{% url 'tags:add' %}">Add tag</a>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Tag</th>
-                <th>Color</th>
-                <th>Entries</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for tag in tag_list %}
-                <tr>
-                    <td>
-                        {% include "partials/tag_badges.html" %}
-                    </td>
-                    <td>{{ tag.get_color_display }}</td>
-                    <td>{{ tag.entry_count }}</td>
-                    <td class="text-end">
-                        <a href="{% url 'tags:edit' tag.pk %}">Edit</a>
-                        <a href="{% url 'tags:delete' tag.pk %}">Delete</a>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4">
-                        {% url 'tags:add' as add_url %}
-                        {% include "partials/empty_state.html" with message="No tags yet." link_url=add_url link_label="Add a tag" %}
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <section class="card page-card table-panel">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Color</th>
+                        <th>Entries</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tag in tag_list %}
+                        <tr>
+                            <td>
+                                {% include "partials/tag_badges.html" %}
+                            </td>
+                            <td>{{ tag.get_color_display }}</td>
+                            <td class="amount">{{ tag.entry_count }}</td>
+                            <td class="text-end text-nowrap">
+                                <a class="me-2" href="{% url 'tags:edit' tag.pk %}">Edit</a>
+                                <a href="{% url 'tags:delete' tag.pk %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">
+                                {% url 'tags:add' as add_url %}
+                                {% include "partials/empty_state.html" with message="No tags yet." link_url=add_url link_label="Add a tag" %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
 {% endblock %}

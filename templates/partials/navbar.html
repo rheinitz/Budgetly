@@ -1,25 +1,36 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+{% load static %}
+{% with app=request.resolver_match.app_name url_name=request.resolver_match.url_name %}
+<nav class="navbar navbar-expand-lg sticky-top navbar-cyber">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'common:home' %}">Budgie</a>
+        <a class="navbar-brand" href="{% url 'common:home' %}">
+            <img src="{% static 'images/favicon.png' %}" alt="" width="28" height="28">
+            Budgie
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="main-nav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'common:home' %}">Home</a>
+                    <a class="nav-link{% if app == 'common' and url_name == 'home' %} active{% endif %}" href="{% url 'common:home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'categories:list' %}">Subcategories</a>
+                    <a class="nav-link{% if app == 'categories' %} active{% endif %}" href="{% url 'categories:list' %}">Subcategories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'tags:list' %}">Tags</a>
+                    <a class="nav-link{% if app == 'tags' %} active{% endif %}" href="{% url 'tags:list' %}">Tags</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'entries:list' %}">All entries</a>
+                    <a class="nav-link{% if app == 'entries' and url_name == 'list' %} active{% endif %}" href="{% url 'entries:list' %}">All entries</a>
                 </li>
             </ul>
-            <a class="btn btn-primary ms-lg-auto" href="{% url 'entries:add' %}">Add entry</a>
+            <div class="d-flex flex-column flex-lg-row gap-2 ms-lg-auto py-2 py-lg-0">
+                <a class="btn btn-sm btn-outline-secondary theme-switch" href="{% url 'common:theme' other_theme %}?next={{ request.get_full_path|urlencode }}">
+                    {% if other_theme == "light" %}Light mode{% else %}Dark mode{% endif %}
+                </a>
+                <a class="btn btn-primary" href="{% url 'entries:add' %}">Add entry</a>
+            </div>
         </div>
     </div>
 </nav>
+{% endwith %}

@@ -3,7 +3,10 @@
 {% block title %}Page not found{% endblock %}
 
 {% block content %}
-    <h1>Page not found</h1>
-    <p>Nothing in Budgie lives at this address.</p>
-    <a href="{% url 'common:home' %}">Back to home</a>
+    <section class="hero text-center">
+        <p class="hero-kicker">Error 404</p>
+        <h1 class="hero-title glitch">404</h1>
+        <p class="hero-lead mx-auto">Page not found. Nothing in Budgie lives at this address.</p>
+        <a class="btn btn-primary" href="{% url 'common:home' %}">Back to home</a>
+    </section>
 {% endblock %}

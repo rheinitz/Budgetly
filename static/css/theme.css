@@ -1,0 +1,114 @@
+/* 
+------------------------------------------------------------------------
+   Budgie - cyberpunk theme
+   Both palettes set the same variables; the other stylesheets read them.
+------------------------------------------------------------------------
+*/
+
+:root {
+    --cp-font-display: "Orbitron", "Segoe UI", sans-serif;
+    --cp-font-body: "Rajdhani", "Segoe UI", sans-serif;
+    --cp-font-mono: "Share Tech Mono", ui-monospace, monospace;
+
+    --bs-body-font-family: var(--cp-font-body);
+    --bs-body-font-size: 1.05rem;
+    --bs-body-font-weight: 500;
+    --bs-border-radius: 3px;
+    --bs-border-radius-sm: 2px;
+    --bs-border-radius-lg: 4px;
+    --bs-border-radius-xl: 6px;
+}
+
+:root[data-bs-theme="dark"] {
+    --cp-cyan-rgb: 0, 229, 255;
+    --cp-magenta-rgb: 255, 43, 214;
+    --cp-yellow-rgb: 252, 238, 10;
+    --cp-surface-rgb: 16, 16, 34;
+    --cp-input-rgb: 8, 8, 20;
+    --cp-line-rgb: 120, 130, 200;
+    --cp-grid-rgb: 0, 229, 255;
+    --cp-on-accent: #07070d;
+    --cp-on-warning: #07070d;
+    --cp-glow: 0.5;
+    --cp-scanline: rgba(0, 0, 0, 0.2);
+    --cp-heading-shadow: 0 0 14px rgba(255, 43, 214, 0.45);
+    --cp-text-glow: 0 0 8px currentColor;
+    --cp-card-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+
+    --bs-body-bg: #07070f;
+    --bs-body-bg-rgb: 7, 7, 15;
+    --bs-body-color: #d9dcf2;
+    --bs-body-color-rgb: 217, 220, 242;
+    --bs-emphasis-color: #ffffff;
+    --bs-heading-color: #f2f3ff;
+    --bs-secondary-color: rgba(217, 220, 242, 0.62);
+    --bs-border-color: rgba(120, 130, 200, 0.3);
+    --bs-link-color: #00e5ff;
+    --bs-link-color-rgb: 0, 229, 255;
+    --bs-link-hover-color: #ff2bd6;
+    --bs-link-hover-color-rgb: 255, 43, 214;
+
+    --bs-primary: #ff2bd6;
+    --bs-primary-rgb: 255, 43, 214;
+    --bs-secondary: #8b90c0;
+    --bs-secondary-rgb: 139, 144, 192;
+    --bs-success: #2dff8f;
+    --bs-success-rgb: 45, 255, 143;
+    --bs-info: #00e5ff;
+    --bs-info-rgb: 0, 229, 255;
+    --bs-warning: #fcee0a;
+    --bs-warning-rgb: 252, 238, 10;
+    --bs-danger: #ff4760;
+    --bs-danger-rgb: 255, 71, 96;
+    --bs-dark: #23233a;
+    --bs-dark-rgb: 35, 35, 58;
+    --bs-form-invalid-color: #ff4760;
+    --bs-form-invalid-border-color: #ff4760;
+}
+
+:root[data-bs-theme="light"] {
+    --cp-cyan-rgb: 0, 128, 159;
+    --cp-magenta-rgb: 194, 0, 143;
+    --cp-yellow-rgb: 122, 98, 0;
+    --cp-surface-rgb: 255, 255, 255;
+    --cp-input-rgb: 255, 255, 255;
+    --cp-line-rgb: 60, 64, 120;
+    --cp-grid-rgb: 60, 64, 120;
+    --cp-on-accent: #ffffff;
+    --cp-on-warning: #ffffff;
+    --cp-glow: 0.18;
+    --cp-scanline: rgba(20, 20, 60, 0.025);
+    --cp-heading-shadow: none;
+    --cp-text-glow: none;
+    --cp-card-shadow: 0 10px 28px rgba(26, 26, 51, 0.08);
+
+    --bs-body-bg: #f2f1f8;
+    --bs-body-bg-rgb: 242, 241, 248;
+    --bs-body-color: #1a1a33;
+    --bs-body-color-rgb: 26, 26, 51;
+    --bs-emphasis-color: #07071a;
+    --bs-heading-color: #0d0d26;
+    --bs-secondary-color: rgba(26, 26, 51, 0.66);
+    --bs-border-color: rgba(60, 64, 120, 0.22);
+    --bs-link-color: #00809f;
+    --bs-link-color-rgb: 0, 128, 159;
+    --bs-link-hover-color: #c2008f;
+    --bs-link-hover-color-rgb: 194, 0, 143;
+
+    --bs-primary: #c2008f;
+    --bs-primary-rgb: 194, 0, 143;
+    --bs-secondary: #5a5f86;
+    --bs-secondary-rgb: 90, 95, 134;
+    --bs-success: #00875a;
+    --bs-success-rgb: 0, 135, 90;
+    --bs-info: #00809f;
+    --bs-info-rgb: 0, 128, 159;
+    --bs-warning: #7a6200;
+    --bs-warning-rgb: 122, 98, 0;
+    --bs-danger: #d11f3d;
+    --bs-danger-rgb: 209, 31, 61;
+    --bs-dark: #1c1c2e;
+    --bs-dark-rgb: 28, 28, 46;
+    --bs-form-invalid-color: #d11f3d;
+    --bs-form-invalid-border-color: #d11f3d;
+}

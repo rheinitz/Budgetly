@@ -8,23 +8,32 @@
     <p>
         <span class="badge text-bg-{{ tag.color }}">{{ tag.get_color_display }}</span>
     </p>
-    <dl>
-        <dt>Name</dt>
-        <dd>{{ tag.name }}</dd>
-        <dt>Color</dt>
-        <dd>{{ tag.get_color_display }}</dd>
-        <dt>Created</dt>
-        <dd>{{ tag.created_at|date:"d M Y, H:i" }}</dd>
-        <dt>Updated</dt>
-        <dd>{{ tag.updated_at|date:"d M Y, H:i" }}</dd>
-    </dl>
-    <p class="h5">Total cost <span class="amount text-danger">{{ totals.expenses|money }}</span></p>
+    <section class="card page-card mb-4">
+        <div class="card-body">
+            <dl class="detail-list">
+                <dt>Name</dt>
+                <dd>{{ tag.name }}</dd>
+                <dt>Color</dt>
+                <dd>{{ tag.get_color_display }}</dd>
+                <dt>Created</dt>
+                <dd>{{ tag.created_at|date:"d M Y, H:i" }}</dd>
+                <dt>Updated</dt>
+                <dd>{{ tag.updated_at|date:"d M Y, H:i" }}</dd>
+                <dt>Total cost</dt>
+                <dd class="amount text-danger fs-4">{{ totals.expenses|money }}</dd>
+            </dl>
+        </div>
+    </section>
     {% totals_cards totals %}
     {% if entries %}
         {% include "partials/entries_table.html" %}
     {% else %}
-        {% include "partials/empty_state.html" with message="No entries use this tag." %}
+        <div class="mb-3">
+            {% include "partials/empty_state.html" with message="No entries use this tag." %}
+        </div>
     {% endif %}
-    <a class="btn btn-primary" href="{% url 'tags:edit' tag.pk %}">Edit</a>
-    <a class="btn btn-outline-danger" href="{% url 'tags:delete' tag.pk %}">Delete</a>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <a class="btn btn-primary" href="{% url 'tags:edit' tag.pk %}">Edit</a>
+        <a class="btn btn-outline-danger" href="{% url 'tags:delete' tag.pk %}">Delete</a>
+    </div>
 {% endblock %}

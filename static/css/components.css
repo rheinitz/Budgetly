@@ -1,0 +1,362 @@
+/* 
+------------------------------------------------------------------------
+   Cards and panels, with HUD corner brackets
+------------------------------------------------------------------------
+*/
+
+.page-card {
+    --bs-card-bg: rgba(var(--cp-surface-rgb), 0.78);
+    --bs-card-border-color: rgba(var(--cp-line-rgb), 0.28);
+    --bs-card-color: var(--bs-body-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--cp-card-shadow);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.page-card::before,
+.page-card::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+}
+
+.page-card::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid rgb(var(--cp-cyan-rgb));
+    border-left: 2px solid rgb(var(--cp-cyan-rgb));
+}
+
+.page-card::after {
+    right: -1px;
+    bottom: -1px;
+    border-right: 2px solid rgb(var(--cp-magenta-rgb));
+    border-bottom: 2px solid rgb(var(--cp-magenta-rgb));
+}
+
+.page-card:hover {
+    border-color: rgba(var(--cp-cyan-rgb), 0.5);
+    box-shadow: var(--cp-card-shadow), 0 0 24px rgba(var(--cp-cyan-rgb), calc(var(--cp-glow) * 0.45));
+}
+
+.table-panel {
+    overflow: hidden;
+}
+
+/* 
+------------------------------------------------------------------------
+   Totals cards: a top line in each category's color
+------------------------------------------------------------------------
+*/
+
+.stat-card {
+    border-top: 2px solid rgb(var(--stat-rgb));
+}
+
+.stat-card::before {
+    display: none;
+}
+
+.stat-card:hover {
+    border-top-color: rgb(var(--stat-rgb));
+}
+
+.stat-card .amount {
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.7rem);
+    text-shadow: var(--cp-text-glow);
+}
+
+.stat-income { --stat-rgb: var(--bs-success-rgb); }
+.stat-expenses { --stat-rgb: var(--bs-danger-rgb); }
+.stat-savings { --stat-rgb: var(--bs-primary-rgb); }
+.stat-investments { --stat-rgb: var(--bs-info-rgb); }
+.stat-net { --stat-rgb: var(--cp-cyan-rgb); }
+.stat-rate { --stat-rgb: var(--bs-warning-rgb); }
+
+/* 
+------------------------------------------------------------------------
+   Lists and empty states
+------------------------------------------------------------------------
+*/
+
+.sub-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid rgba(var(--cp-line-rgb), 0.15);
+}
+
+.sub-list li:last-child {
+    border-bottom: 0;
+}
+
+.empty-state {
+    padding: 1.25rem;
+    text-align: center;
+    border: 1px dashed rgba(var(--cp-line-rgb), 0.45);
+    background-color: rgba(var(--cp-surface-rgb), 0.35);
+}
+
+/* 
+------------------------------------------------------------------------
+   Buttons
+------------------------------------------------------------------------
+*/
+
+.btn {
+    --bs-btn-font-family: var(--cp-font-body);
+    --bs-btn-font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.2s, filter 0.15s;
+}
+
+.btn-primary,
+.btn-danger {
+    --bs-btn-color: var(--cp-on-accent);
+    --bs-btn-bg: rgb(var(--cp-btn-rgb));
+    --bs-btn-border-color: rgb(var(--cp-btn-rgb));
+    --bs-btn-hover-color: var(--cp-on-accent);
+    --bs-btn-hover-bg: rgb(var(--cp-btn-rgb));
+    --bs-btn-hover-border-color: rgb(var(--cp-btn-rgb));
+    --bs-btn-active-color: var(--cp-on-accent);
+    --bs-btn-active-bg: rgb(var(--cp-btn-rgb));
+    --bs-btn-active-border-color: rgb(var(--cp-btn-rgb));
+    --bs-btn-disabled-color: var(--cp-on-accent);
+    --bs-btn-disabled-bg: rgb(var(--cp-btn-rgb));
+    --bs-btn-disabled-border-color: rgb(var(--cp-btn-rgb));
+    --bs-btn-focus-shadow-rgb: var(--cp-btn-rgb);
+    box-shadow: 0 0 14px rgba(var(--cp-btn-rgb), calc(var(--cp-glow) * 0.7));
+}
+
+.btn-primary:hover,
+.btn-danger:hover {
+    filter: brightness(1.12);
+    box-shadow: 0 0 22px rgba(var(--cp-btn-rgb), var(--cp-glow));
+}
+
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-info,
+.btn-outline-danger {
+    --bs-btn-color: rgb(var(--cp-btn-rgb));
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: rgba(var(--cp-btn-rgb), 0.65);
+    --bs-btn-hover-color: var(--cp-on-accent);
+    --bs-btn-hover-bg: rgb(var(--cp-btn-rgb));
+    --bs-btn-hover-border-color: rgb(var(--cp-btn-rgb));
+    --bs-btn-active-color: var(--cp-on-accent);
+    --bs-btn-active-bg: rgb(var(--cp-btn-rgb));
+    --bs-btn-active-border-color: rgb(var(--cp-btn-rgb));
+    --bs-btn-focus-shadow-rgb: var(--cp-btn-rgb);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover,
+.btn-outline-info:hover,
+.btn-outline-danger:hover {
+    box-shadow: 0 0 18px rgba(var(--cp-btn-rgb), var(--cp-glow));
+}
+
+.btn-primary,
+.btn-outline-primary { --cp-btn-rgb: var(--bs-primary-rgb); }
+.btn-danger,
+.btn-outline-danger { --cp-btn-rgb: var(--bs-danger-rgb); }
+.btn-outline-info { --cp-btn-rgb: var(--bs-info-rgb); }
+.btn-outline-secondary { --cp-btn-rgb: var(--cp-cyan-rgb); }
+
+/* 
+------------------------------------------------------------------------
+   Forms
+------------------------------------------------------------------------
+*/
+
+.form-label {
+    margin-bottom: 0.4rem;
+    font-family: var(--cp-font-display);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bs-secondary-color);
+}
+
+.form-control,
+.form-select {
+    font-weight: 500;
+    color: var(--bs-body-color);
+    background-color: rgba(var(--cp-input-rgb), 0.75);
+    border-color: rgba(var(--cp-line-rgb), 0.4);
+}
+
+.form-control::placeholder {
+    color: rgba(var(--bs-body-color-rgb), 0.4);
+}
+
+.form-control:focus,
+.form-select:focus {
+    color: var(--bs-body-color);
+    background-color: rgba(var(--cp-input-rgb), 0.95);
+    border-color: rgb(var(--cp-cyan-rgb));
+    box-shadow:
+        0 0 0 0.2rem rgba(var(--cp-cyan-rgb), 0.2),
+        0 0 16px rgba(var(--cp-cyan-rgb), calc(var(--cp-glow) * 0.7));
+}
+
+.form-control:disabled,
+.form-select:disabled {
+    color: var(--bs-secondary-color);
+    background-color: rgba(var(--cp-line-rgb), 0.08);
+}
+
+select[multiple].form-select option:checked {
+    color: var(--cp-on-accent);
+    background: linear-gradient(rgb(var(--cp-cyan-rgb)), rgb(var(--cp-cyan-rgb)));
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    column-gap: 1rem;
+}
+
+.filter-grid > .alert {
+    grid-column: 1 / -1;
+}
+
+/* 
+------------------------------------------------------------------------
+   Tables
+------------------------------------------------------------------------
+*/
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--bs-body-color);
+    --bs-table-border-color: rgba(var(--cp-line-rgb), 0.2);
+    margin-bottom: 0;
+}
+
+.table td,
+.table th {
+    padding: 0.8rem 1rem;
+    vertical-align: middle;
+}
+
+.table > thead th {
+    font-family: var(--cp-font-display);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--bs-secondary-color);
+    border-bottom: 1px solid rgba(var(--cp-cyan-rgb), 0.45);
+}
+
+.table > tbody > tr:hover > * {
+    --bs-table-bg-state: rgba(var(--cp-cyan-rgb), 0.07);
+}
+
+.table > tbody > tr:last-child > * {
+    border-bottom: 0;
+}
+
+.table .amount {
+    text-shadow: var(--cp-text-glow);
+}
+
+/* 
+------------------------------------------------------------------------
+   Badges, progress bar, alerts, pagination
+------------------------------------------------------------------------
+*/
+
+.badge {
+    padding: 0.4em 0.65em;
+    font-family: var(--cp-font-body);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+a.badge {
+    text-decoration: none;
+    transition: filter 0.15s;
+}
+
+a.badge:hover {
+    filter: brightness(1.15);
+}
+
+.text-bg-primary,
+.text-bg-secondary,
+.text-bg-success,
+.text-bg-info,
+.text-bg-danger {
+    color: var(--cp-on-accent) !important;
+}
+
+.text-bg-warning {
+    color: var(--cp-on-warning) !important;
+}
+
+.text-bg-dark {
+    color: #f2f3ff !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--cp-line-rgb), 0.6);
+}
+
+.text-bg-primary { box-shadow: 0 0 12px rgba(var(--bs-primary-rgb), calc(var(--cp-glow) * 0.6)); }
+.text-bg-secondary { box-shadow: 0 0 12px rgba(var(--bs-secondary-rgb), calc(var(--cp-glow) * 0.6)); }
+.text-bg-success { box-shadow: 0 0 12px rgba(var(--bs-success-rgb), calc(var(--cp-glow) * 0.6)); }
+.text-bg-info { box-shadow: 0 0 12px rgba(var(--bs-info-rgb), calc(var(--cp-glow) * 0.6)); }
+.text-bg-warning { box-shadow: 0 0 12px rgba(var(--bs-warning-rgb), calc(var(--cp-glow) * 0.6)); }
+.text-bg-danger { box-shadow: 0 0 12px rgba(var(--bs-danger-rgb), calc(var(--cp-glow) * 0.6)); }
+
+.progress {
+    --bs-progress-height: 0.55rem;
+    --bs-progress-bg: rgba(var(--cp-line-rgb), 0.14);
+    --bs-progress-border-radius: 0;
+    overflow: visible;
+}
+
+.progress-bar {
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.35));
+}
+
+.progress-bar.bg-danger { box-shadow: 0 0 12px rgba(var(--bs-danger-rgb), var(--cp-glow)); }
+.progress-bar.bg-primary { box-shadow: 0 0 12px rgba(var(--bs-primary-rgb), var(--cp-glow)); }
+.progress-bar.bg-info { box-shadow: 0 0 12px rgba(var(--bs-info-rgb), var(--cp-glow)); }
+
+.alert {
+    border-left-width: 3px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.alert-danger {
+    --bs-alert-color: rgb(var(--bs-danger-rgb));
+    --bs-alert-bg: rgba(var(--bs-danger-rgb), 0.1);
+    --bs-alert-border-color: rgba(var(--bs-danger-rgb), 0.45);
+    border-left-color: rgb(var(--bs-danger-rgb));
+}
+
+.alert-warning {
+    --bs-alert-color: rgb(var(--bs-warning-rgb));
+    --bs-alert-bg: rgba(var(--bs-warning-rgb), 0.1);
+    --bs-alert-border-color: rgba(var(--bs-warning-rgb), 0.45);
+    border-left-color: rgb(var(--bs-warning-rgb));
+}
+
+.alert .errorlist {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+.pager-status {
+    font-family: var(--cp-font-mono);
+    color: var(--bs-secondary-color);
+}

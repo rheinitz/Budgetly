@@ -3,21 +3,39 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
-    <h1>About</h1>
-    <p>Budgie keeps income, expenses, savings and investments for each month on their own.</p>
+    <h1 class="mb-3">About</h1>
+    <p class="hero-lead mb-4">Budgie keeps income, expenses, savings and investments for each month on their own.</p>
 
-    <h2 class="h4 mt-4">Categories</h2>
-    <ul>
-        <li>Income is money coming in.</li>
-        <li>Expenses is money spent.</li>
-        <li>Savings is money set aside.</li>
-        <li>Investments is money put to work.</li>
-    </ul>
-
-    <h2 class="h4 mt-4">Totals</h2>
-    <p>Net is income minus expenses, savings and investments.</p>
-    <p>The savings rate is savings plus investments, divided by income. When income is 0, the rate is shown as a dash.</p>
-
-    <h2 class="h4 mt-4">Amounts</h2>
-    <p>Every entry is a positive amount. The category decides whether the money came in or went out.</p>
+    <div class="row row-cols-1 row-cols-lg-3 g-3">
+        <div class="col">
+            <section class="card page-card h-100">
+                <div class="card-body">
+                    <h2 class="h6 section-title mb-3">Categories</h2>
+                    <ul class="list-unstyled sub-list mb-0">
+                        <li><span class="badge text-bg-success">Income</span> money coming in</li>
+                        <li><span class="badge text-bg-danger">Expenses</span> money spent</li>
+                        <li><span class="badge text-bg-primary">Savings</span> money set aside</li>
+                        <li><span class="badge text-bg-info">Investments</span> money put to work</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <div class="col">
+            <section class="card page-card h-100">
+                <div class="card-body">
+                    <h2 class="h6 section-title mb-3">Totals</h2>
+                    <p>Net is income minus expenses, savings and investments.</p>
+                    <p class="mb-0">The savings rate is savings plus investments, divided by income. When income is 0, the rate is shown as a dash.</p>
+                </div>
+            </section>
+        </div>
+        <div class="col">
+            <section class="card page-card h-100">
+                <div class="card-body">
+                    <h2 class="h6 section-title mb-3">Amounts</h2>
+                    <p class="mb-0">Every entry is a positive amount. The category decides whether the money came in or went out.</p>
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}
