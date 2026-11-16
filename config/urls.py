@@ -22,5 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("subcategories/", include("categories.urls")),
     path("tags/", include("tags.urls")),
+    path("entries/", include("entries.urls")),
     path("", include("common.urls")),
 ]

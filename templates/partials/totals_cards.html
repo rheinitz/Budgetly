@@ -1,0 +1,64 @@
+{% load budgetly_tags %}
+
+<div class="row row-cols-2 row-cols-lg-3 g-3 mb-3">
+    <div class="col">
+        <section class="card page-card h-100">
+            <div class="card-body">
+                <span class="badge text-bg-success">Income</span>
+                <div class="amount mt-2">{{ totals.income|money }}</div>
+            </div>
+        </section>
+    </div>
+    <div class="col">
+        <section class="card page-card h-100">
+            <div class="card-body">
+                <span class="badge text-bg-danger">Expenses</span>
+                <div class="amount mt-2">{{ totals.expenses|money }}</div>
+            </div>
+        </section>
+    </div>
+    <div class="col">
+        <section class="card page-card h-100">
+            <div class="card-body">
+                <span class="badge text-bg-primary">Savings</span>
+                <div class="amount mt-2">{{ totals.savings|money }}</div>
+            </div>
+        </section>
+    </div>
+    <div class="col">
+        <section class="card page-card h-100">
+            <div class="card-body">
+                <span class="badge text-bg-info">Investments</span>
+                <div class="amount mt-2">{{ totals.investments|money }}</div>
+            </div>
+        </section>
+    </div>
+    <div class="col">
+        <section class="card page-card h-100">
+            <div class="card-body">
+                <span class="badge text-bg-secondary">Net</span>
+                <div class="amount mt-2{% if totals.net < 0 %} amount-negative{% endif %}">{{ totals.net|money }}</div>
+            </div>
+        </section>
+    </div>
+    <div class="col">
+        <section class="card page-card h-100">
+            <div class="card-body">
+                <span class="badge text-bg-secondary">Savings rate</span>
+                <div class="amount mt-2">
+                    {% if totals.savings_rate is not None %}
+                        {{ totals.savings_rate }}%
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<p class="text-body-secondary small mb-2">How income was allocated</p>
+<div class="progress mb-3">
+    <div class="progress-bar bg-danger" style="width: {% widthratio totals.expenses totals.income 100 %}%"></div>
+    <div class="progress-bar bg-primary" style="width: {% widthratio totals.savings totals.income 100 %}%"></div>
+    <div class="progress-bar bg-info" style="width: {% widthratio totals.investments totals.income 100 %}%"></div>
+</div>

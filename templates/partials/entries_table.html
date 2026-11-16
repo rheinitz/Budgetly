@@ -1,0 +1,30 @@
+{% load budgetly_tags %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Description</th>
+            <th>Tags</th>
+            <th class="text-end">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry.date|date:"d M Y" }}</td>
+                <td>
+                    <span class="badge text-bg-{{ entry.category.badge_color }}">{{ entry.category.label }}</span>
+                </td>
+                <td>
+                    <a href="{{ entry.subcategory.get_absolute_url }}">{{ entry.subcategory.name }}</a>
+                </td>
+                <td>{{ entry.description|truncatechars:40|default:"-" }}</td>
+                <td>{% include "partials/tag_badges.html" with tags=entry.tags.all %}</td>
+                <td class="text-end amount text-{{ entry.category.badge_color }}">{{ entry.amount|money }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

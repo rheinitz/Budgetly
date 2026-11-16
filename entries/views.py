@@ -1,3 +1,32 @@
-from django.shortcuts import render
+from datetime import date
+from typing import Any
 
-# Create your views here.
+from django.http import HttpRequest, HttpResponseRedirect
+from django.shortcuts import redirect
+from django.views.generic import ListView
+
+from common.mixins import MonthMixin
+from entries.models import Entry
+from entries.querysets import EntryQuerySet
+
+
+def current_month(request: HttpRequest) -> HttpResponseRedirect:
+    today = date.today()
+    return redirect("entries:month", year=today.year, month=today.month)
+
+
+class MonthEntriesView(MonthMixin, ListView):
+    model = Entry
+    template_name = "entries/entry_month.html"
+    context_object_name = "entries"
+
+    def get_queryset(self) -> EntryQuerySet:
+        return Entry.objects.for_month(
+            self.month_start.year,
+            self.month_start.month,
+        ).with_related()
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["totals"] = self.object_list.totals()
+        return context
