@@ -4,18 +4,18 @@ from django.core.exceptions import ValidationError
 from categories.choices import Category
 from common.constants import CURRENCY_SYMBOL
 from common.forms import BootstrapFormMixin, DisabledFieldsMixin
-from entries.choices import EntryPageSize, EntrySort
-from entries.models import Entry
+from transactions.choices import TransactionPageSize, TransactionSort
+from transactions.models import Transaction
 from tags.models import Tag
 
 
-class EntryForm(BootstrapFormMixin, forms.ModelForm):
+class TransactionForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
-        model = Entry
-        fields = ["date", "subcategory", "amount", "description", "tags"]
+        model = Transaction
+        fields = ["date", "type", "amount", "description", "tags"]
         labels = {
             "date": "Date",
-            "subcategory": "Subcategory",
+            "type": "Type",
             "amount": f"Amount ({CURRENCY_SYMBOL})",
             "description": "Description",
             "tags": "Tags",
@@ -30,8 +30,8 @@ class EntryForm(BootstrapFormMixin, forms.ModelForm):
             "tags": "Optional. Hold Ctrl (Cmd on Mac) to select several.",
         }
         error_messages = {
-            "subcategory": {
-                "required": "Choose a subcategory.",
+            "type": {
+                "required": "Choose a type.",
             },
             "amount": {
                 "required": "Enter an amount.",
@@ -46,15 +46,15 @@ class EntryForm(BootstrapFormMixin, forms.ModelForm):
         }
 
 
-class EntryDeleteForm(DisabledFieldsMixin, EntryForm):
+class TransactionDeleteForm(DisabledFieldsMixin, TransactionForm):
     pass
 
 
-class EntryFilterForm(BootstrapFormMixin, forms.Form):
+class TransactionFilterForm(BootstrapFormMixin, forms.Form):
     q = forms.CharField(
         label="Search",
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": "Description or subcategory"}),
+        widget=forms.TextInput(attrs={"placeholder": "Description or type"}),
     )
     category = forms.ChoiceField(
         label="Category",
@@ -80,14 +80,14 @@ class EntryFilterForm(BootstrapFormMixin, forms.Form):
     sort = forms.ChoiceField(
         label="Sort",
         required=False,
-        choices=EntrySort.choices,
+        choices=TransactionSort.choices,
     )
     per_page = forms.TypedChoiceField(
         label="Per page",
         required=False,
-        choices=EntryPageSize.choices,
+        choices=TransactionPageSize.choices,
         coerce=int,
-        empty_value=EntryPageSize.TEN,
+        empty_value=TransactionPageSize.TEN,
     )
 
     def clean(self) -> dict[str, object]:

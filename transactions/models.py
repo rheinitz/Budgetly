@@ -7,20 +7,20 @@ from django.urls import reverse
 
 from categories.choices import Category
 from common.models import TimeStampMixin
-from entries.querysets import EntryQuerySet
-from entries.validators import validate_not_in_future
+from transactions.querysets import TransactionQuerySet
+from transactions.validators import validate_not_in_future
 
 
-class Entry(TimeStampMixin):
-    subcategory = models.ForeignKey(
-        "categories.Subcategory",
+class Transaction(TimeStampMixin):
+    type = models.ForeignKey(
+        "categories.Type",
         on_delete=models.RESTRICT,
-        related_name="entries",
+        related_name="transactions",
     )
     tags = models.ManyToManyField(
         "tags.Tag",
         blank=True,
-        related_name="entries",
+        related_name="transactions",
     )
     amount = models.DecimalField(
         max_digits=10,
@@ -34,24 +34,25 @@ class Entry(TimeStampMixin):
         db_index=True,
     )
 
-    objects = EntryQuerySet.as_manager()
+    objects = TransactionQuerySet.as_manager()
 
     class Meta:
         ordering = ["-date", "-created_at"]
-        verbose_name_plural = "entries"
+        verbose_name = "transaction"
+        verbose_name_plural = "transactions"
 
     def __str__(self) -> str:
-        return f"{self.date:%Y-%m-%d} - {self.subcategory.name} - {self.amount:.2f}"
+        return f"{self.date:%Y-%m-%d} - {self.type.name} - {self.amount:.2f}"
 
     @property
     def category(self) -> Category:
-        return self.subcategory.category_choice
+        return self.type.category_choice
 
     def get_month_url(self) -> str:
         return reverse(
-            "entries:month",
+            "transactions:month",
             kwargs={"year": self.date.year, "month": self.date.month},
         )
 
     def get_absolute_url(self) -> str:
-        return reverse("entries:detail", kwargs={"pk": self.pk})
+        return reverse("transactions:detail", kwargs={"pk": self.pk})

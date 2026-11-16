@@ -2,13 +2,13 @@ from typing import Any
 
 from django import forms
 
-from categories.models import Subcategory
+from categories.models import Type
 from common.forms import BootstrapFormMixin, DisabledFieldsMixin
 
 
-class SubcategoryForm(BootstrapFormMixin, forms.ModelForm):
+class TypeForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
-        model = Subcategory
+        model = Type
         fields = ["category", "name"]
         labels = {
             "category": "Category",
@@ -33,12 +33,12 @@ class SubcategoryForm(BootstrapFormMixin, forms.ModelForm):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        if self.instance.pk and self.instance.entries.exists():
+        if self.instance.pk and self.instance.transactions.exists():
             self.fields["category"].disabled = True
             self.fields["category"].help_text = (
-                "Locked because this subcategory already has entries."
+                "Locked because this type already has transactions."
             )
 
 
-class SubcategoryDeleteForm(DisabledFieldsMixin, SubcategoryForm):
+class TypeDeleteForm(DisabledFieldsMixin, TypeForm):
     pass

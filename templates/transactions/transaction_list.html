@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load budgie_tags %}
 
-{% block title %}All entries{% endblock %}
+{% block title %}Transactions{% endblock %}
 
 {% block content %}
-    <h1 class="mb-3">All entries</h1>
+    <h1 class="mb-3">Transactions</h1>
     <section class="card page-card mb-4">
         <div class="card-body">
             <form method="get">
@@ -13,16 +13,16 @@
                 </div>
                 <div class="d-flex flex-wrap align-items-center gap-3">
                     <button class="btn btn-primary" type="submit">Filter</button>
-                    <a href="{% url 'entries:list' %}">Reset</a>
+                    <a href="{% url 'transactions:list' %}">Reset</a>
                 </div>
             </form>
         </div>
     </section>
     {% totals_cards totals %}
-    {% if entries %}
-        {% include "partials/entries_table.html" %}
+    {% if transactions %}
+        {% include "partials/transactions_table.html" %}
     {% else %}
-        {% include "partials/empty_state.html" with message="No entries found." %}
+        {% include "partials/empty_state.html" with message="No transactions found." %}
     {% endif %}
     {% include "partials/pagination.html" %}
 {% endblock %}

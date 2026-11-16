@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from categories.models import Subcategory
+from categories.models import Type
 
 
-@admin.register(Subcategory)
-class SubcategoryAdmin(admin.ModelAdmin):
+@admin.register(Type)
+class TypeAdmin(admin.ModelAdmin):
     list_display = ["name", "category", "created_at"]
     list_filter = ["category"]
     ordering = ["category", "name"]

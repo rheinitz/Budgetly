@@ -1,5 +1,5 @@
 <div class="d-flex flex-wrap gap-2 mb-3">
-    <a class="btn btn-outline-secondary" href="{% url 'entries:month' previous_month.year previous_month.month %}">Previous</a>
-    <a class="btn btn-outline-secondary" href="{% url 'entries:current' %}">This month</a>
-    <a class="btn btn-outline-secondary" href="{% url 'entries:month' next_month.year next_month.month %}">Next</a>
+    <a class="btn btn-outline-secondary" href="{% url 'transactions:month' previous_month.year previous_month.month %}">Previous</a>
+    <a class="btn btn-outline-secondary" href="{% url 'transactions:current' %}">This month</a>
+    <a class="btn btn-outline-secondary" href="{% url 'transactions:month' next_month.year next_month.month %}">Next</a>
 </div>

@@ -6,28 +6,28 @@ from django.db import models
 from django.db.models import Q, Sum
 
 from categories.choices import Category
-from entries.totals import CategoryTotals
+from transactions.totals import CategoryTotals
 from tags.models import Tag
 
 
-class EntryQuerySet(models.QuerySet):
+class TransactionQuerySet(models.QuerySet):
     def for_month(self, year: int, month: int) -> Self:
         return self.filter(date__year=year, date__month=month)
 
     def with_related(self) -> Self:
-        return self.select_related("subcategory").prefetch_related("tags")
+        return self.select_related("type").prefetch_related("tags")
 
     def search(self, text: str) -> Self:
         if not text:
             return self
         return self.filter(
-            Q(description__icontains=text) | Q(subcategory__name__icontains=text)
+            Q(description__icontains=text) | Q(type__name__icontains=text)
         )
 
     def in_category(self, category: str) -> Self:
         if not category:
             return self
-        return self.filter(subcategory__category=category)
+        return self.filter(type__category=category)
 
     def with_tag(self, tag: Tag | None) -> Self:
         if not tag:
@@ -44,12 +44,12 @@ class EntryQuerySet(models.QuerySet):
     def totals_by_category(self) -> dict[str, Decimal]:
         grouped = (
             self.order_by()
-            .values("subcategory__category")
+            .values("type__category")
             .annotate(total=Sum("amount"))
         )
         totals = {category.value: Decimal("0.00") for category in Category}
         for row in grouped:
-            totals[row["subcategory__category"]] = row["total"]
+            totals[row["type__category"]] = row["total"]
         return totals
 
     def totals(self) -> CategoryTotals:
