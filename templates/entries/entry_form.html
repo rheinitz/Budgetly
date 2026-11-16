@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit entry{% else %}Add entry{% endif %}{% endblock %}
+
+{% block content %}
+    <h1>{% if object %}Edit entry{% else %}Add entry{% endif %}</h1>
+    {% if not object and not has_subcategories %}
+        {% url 'categories:add' as add_url %}
+        {% include "partials/empty_state.html" with message="Create a subcategory before adding an entry." link_url=add_url link_label="Add a subcategory" %}
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {% include "partials/form_fields.html" %}
+            <p><a href="{% url 'tags:add' %}">Need a new tag?</a></p>
+            <button class="btn btn-primary" type="submit">Save</button>
+            {% if object %}
+                <a href="{{ object.get_absolute_url }}">Cancel</a>
+            {% else %}
+                <a href="{% url 'entries:current' %}">Cancel</a>
+            {% endif %}
+        </form>
+    {% endif %}
+{% endblock %}

@@ -3,9 +3,12 @@ from typing import Any
 
 from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import redirect
-from django.views.generic import ListView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
-from common.mixins import MonthMixin
+from categories.models import Subcategory
+from common.mixins import DeleteFormInstanceMixin, MonthMixin
+from entries.forms import EntryDeleteForm, EntryForm
+from entries.mixins import EntryMonthRedirectMixin
 from entries.models import Entry
 from entries.querysets import EntryQuerySet
 
@@ -30,3 +33,27 @@ class MonthEntriesView(MonthMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["totals"] = self.object_list.totals()
         return context
+
+
+class EntryCreateView(EntryMonthRedirectMixin, CreateView):
+    model = Entry
+    form_class = EntryForm
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["has_subcategories"] = Subcategory.objects.exists()
+        return context
+
+
+class EntryUpdateView(EntryMonthRedirectMixin, UpdateView):
+    model = Entry
+    form_class = EntryForm
+
+
+class EntryDetailView(DetailView):
+    queryset = Entry.objects.with_related()
+
+
+class EntryDeleteView(EntryMonthRedirectMixin, DeleteFormInstanceMixin, DeleteView):
+    model = Entry
+    form_class = EntryDeleteForm
