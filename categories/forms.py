@@ -1,3 +1,5 @@
+from typing import Any
+
 from django import forms
 
 from categories.models import Subcategory
@@ -28,6 +30,14 @@ class SubcategoryForm(BootstrapFormMixin, forms.ModelForm):
                 "max_length": "Name cannot be longer than 40 characters.",
             },
         }
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        if self.instance.pk and self.instance.entries.exists():
+            self.fields["category"].disabled = True
+            self.fields["category"].help_text = (
+                "Locked because this subcategory already has entries."
+            )
 
 
 class SubcategoryDeleteForm(DisabledFieldsMixin, SubcategoryForm):

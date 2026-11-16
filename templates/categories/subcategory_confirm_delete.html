@@ -4,11 +4,21 @@
 
 {% block content %}
     <h1>Delete {{ subcategory.name }}</h1>
-    <p>This subcategory will be removed.</p>
+    {% if delete_error %}
+        <div class="alert alert-danger">{{ delete_error }}</div>
+    {% endif %}
+    {% if has_entries %}
+        <div class="alert alert-warning">This subcategory has entries, so it cannot be deleted.</div>
+        <p><a href="{{ subcategory.get_absolute_url }}">View its entries</a></p>
+    {% else %}
+        <p>This subcategory will be removed.</p>
+    {% endif %}
     <form method="post">
         {% csrf_token %}
         {% include "partials/form_fields.html" %}
-        <button class="btn btn-danger" type="submit">Delete</button>
+        {% if not has_entries %}
+            <button class="btn btn-danger" type="submit">Delete</button>
+        {% endif %}
         <a href="{{ subcategory.get_absolute_url }}">Cancel</a>
     </form>
 {% endblock %}

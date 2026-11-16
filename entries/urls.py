@@ -4,6 +4,7 @@ from entries.views import (
     EntryCreateView,
     EntryDeleteView,
     EntryDetailView,
+    EntryListView,
     EntryUpdateView,
     MonthEntriesView,
     current_month,
@@ -12,6 +13,7 @@ from entries.views import (
 app_name = "entries"
 
 urlpatterns = [
+    path("", EntryListView.as_view(), name="list"),
     path("current/", current_month, name="current"),
     path("add/", EntryCreateView.as_view(), name="add"),
     path("<int:year>/<int:month>/", MonthEntriesView.as_view(), name="month"),

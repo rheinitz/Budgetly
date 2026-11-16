@@ -7,7 +7,8 @@ from django.views.generic import CreateView, DeleteView, DetailView, ListView, U
 
 from categories.models import Subcategory
 from common.mixins import DeleteFormInstanceMixin, MonthMixin
-from entries.forms import EntryDeleteForm, EntryForm
+from entries.choices import EntryPageSize
+from entries.forms import EntryDeleteForm, EntryFilterForm, EntryForm
 from entries.mixins import EntryMonthRedirectMixin
 from entries.models import Entry
 from entries.querysets import EntryQuerySet
@@ -31,6 +32,41 @@ class MonthEntriesView(MonthMixin, ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        context["totals"] = self.object_list.totals()
+        return context
+
+
+class EntryListView(ListView):
+    model = Entry
+    paginate_by = 10
+    context_object_name = "entries"
+
+    def get_paginate_by(self, queryset: EntryQuerySet) -> int:
+        per_page = self.filter_form.cleaned_data.get("per_page")
+        if per_page in EntryPageSize.values:
+            return per_page
+        return EntryPageSize.TEN
+
+    def get_queryset(self) -> EntryQuerySet:
+        data = self.request.GET.copy()
+        if not data.get("per_page"):
+            data["per_page"] = str(EntryPageSize.TEN)
+        self.filter_form = EntryFilterForm(data)
+        queryset = Entry.objects.with_related()
+        if not self.filter_form.is_valid():
+            return queryset
+        cleaned = self.filter_form.cleaned_data
+        return (
+            queryset.search(cleaned["q"])
+            .in_category(cleaned["category"])
+            .with_tag(cleaned["tag"])
+            .between(cleaned["start"], cleaned["end"])
+            .order_by(cleaned["sort"] or "-date", "-pk")
+        )
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = self.filter_form
         context["totals"] = self.object_list.totals()
         return context
 

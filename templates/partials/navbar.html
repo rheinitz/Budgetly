@@ -15,7 +15,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'tags:list' %}">Tags</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'entries:list' %}">All entries</a>
+                </li>
             </ul>
+            <a class="btn btn-primary ms-lg-auto" href="{% url 'entries:add' %}">Add entry</a>
         </div>
     </div>
 </nav>

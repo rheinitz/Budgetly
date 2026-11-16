@@ -1,8 +1,12 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
+from categories.choices import Category
 from common.constants import CURRENCY_SYMBOL
 from common.forms import BootstrapFormMixin, DisabledFieldsMixin
+from entries.choices import EntryPageSize, EntrySort
 from entries.models import Entry
+from tags.models import Tag
 
 
 class EntryForm(BootstrapFormMixin, forms.ModelForm):
@@ -44,3 +48,52 @@ class EntryForm(BootstrapFormMixin, forms.ModelForm):
 
 class EntryDeleteForm(DisabledFieldsMixin, EntryForm):
     pass
+
+
+class EntryFilterForm(BootstrapFormMixin, forms.Form):
+    q = forms.CharField(
+        label="Search",
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder": "Description or subcategory"}),
+    )
+    category = forms.ChoiceField(
+        label="Category",
+        required=False,
+        choices=[("", "All categories"), *Category.choices],
+    )
+    tag = forms.ModelChoiceField(
+        label="Tag",
+        required=False,
+        queryset=Tag.objects.all(),
+        empty_label="All tags",
+    )
+    start = forms.DateField(
+        label="Start",
+        required=False,
+        widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+    )
+    end = forms.DateField(
+        label="End",
+        required=False,
+        widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+    )
+    sort = forms.ChoiceField(
+        label="Sort",
+        required=False,
+        choices=EntrySort.choices,
+    )
+    per_page = forms.TypedChoiceField(
+        label="Per page",
+        required=False,
+        choices=EntryPageSize.choices,
+        coerce=int,
+        empty_value=EntryPageSize.TEN,
+    )
+
+    def clean(self) -> dict[str, object]:
+        cleaned_data = super().clean()
+        start = cleaned_data.get("start")
+        end = cleaned_data.get("end")
+        if start and end and start > end:
+            raise ValidationError("Start date must be on or before the end date.")
+        return cleaned_data

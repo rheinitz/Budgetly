@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load budgetly_tags %}
 
 {% block title %}{{ tag.name }}{% endblock %}
 
@@ -17,6 +18,13 @@
         <dt>Updated</dt>
         <dd>{{ tag.updated_at|date:"d M Y, H:i" }}</dd>
     </dl>
+    <p class="h5">Total cost <span class="amount text-danger">{{ totals.expenses|money }}</span></p>
+    {% totals_cards totals %}
+    {% if entries %}
+        {% include "partials/entries_table.html" %}
+    {% else %}
+        {% include "partials/empty_state.html" with message="No entries use this tag." %}
+    {% endif %}
     <a class="btn btn-primary" href="{% url 'tags:edit' tag.pk %}">Edit</a>
     <a class="btn btn-outline-danger" href="{% url 'tags:delete' tag.pk %}">Delete</a>
 {% endblock %}

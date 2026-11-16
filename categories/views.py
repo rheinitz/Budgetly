@@ -1,5 +1,7 @@
 from typing import Any
 
+from django.db.models import Count, RestrictedError
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
@@ -11,6 +13,9 @@ from common.mixins import DeleteFormInstanceMixin
 
 class SubcategoryListView(ListView):
     model = Subcategory
+
+    def get_queryset(self):
+        return super().get_queryset().annotate(entry_count=Count("entries"))
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -28,6 +33,13 @@ class SubcategoryListView(ListView):
 
 class SubcategoryDetailView(DetailView):
     model = Subcategory
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        entries = self.object.entries.with_related()
+        context["entries"] = entries
+        context["total"] = entries.total_amount()
+        return context
 
 
 class SubcategoryCreateView(CreateView):
@@ -51,3 +63,18 @@ class SubcategoryDeleteView(DeleteFormInstanceMixin, DeleteView):
     model = Subcategory
     form_class = SubcategoryDeleteForm
     success_url = reverse_lazy("categories:list")
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["has_entries"] = self.object.entries.exists()
+        return context
+
+    def form_valid(self, form: SubcategoryDeleteForm) -> HttpResponse:
+        try:
+            return super().form_valid(form)
+        except RestrictedError:
+            context = self.get_context_data(
+                form=form,
+                delete_error="This subcategory was not deleted because it has entries.",
+            )
+            return self.render_to_response(context)

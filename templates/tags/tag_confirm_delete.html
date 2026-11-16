@@ -4,7 +4,10 @@
 
 {% block content %}
     <h1>Delete {{ tag.name }}</h1>
-    <p>Entries that use this tag will keep existing. They only lose this tag.</p>
+    <p>
+        {{ entry_count }} entr{{ entry_count|pluralize:"y,ies" }} will lose this tag.
+        The entries themselves stay.
+    </p>
     <form method="post">
         {% csrf_token %}
         {% include "partials/form_fields.html" %}

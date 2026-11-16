@@ -14,7 +14,7 @@
     <tbody>
         {% for entry in entries %}
             <tr>
-                <td>{{ entry.date|date:"d M Y" }}</td>
+                <td><a href="{{ entry.get_absolute_url }}">{{ entry.date|date:"d M Y" }}</a></td>
                 <td>
                     <span class="badge text-bg-{{ entry.category.badge_color }}">{{ entry.category.label }}</span>
                 </td>

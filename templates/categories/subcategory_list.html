@@ -19,6 +19,9 @@
                         {% for subcategory in subcategories %}
                             <li>
                                 <a href="{{ subcategory.get_absolute_url }}">{{ subcategory.name }}</a>
+                                <span class="text-body-secondary">
+                                    {{ subcategory.entry_count }} entr{{ subcategory.entry_count|pluralize:"y,ies" }}
+                                </span>
                             </li>
                         {% endfor %}
                     </ul>
