@@ -13,7 +13,7 @@ class TagListView(ListView):
     model = Tag
 
     def get_queryset(self):
-        return super().get_queryset().annotate(entry_count=Count("entries"))
+        return super().get_queryset().annotate(transaction_count=Count("transactions"))
 
 
 class TagDetailView(DetailView):
@@ -21,9 +21,9 @@ class TagDetailView(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        entries = self.object.entries.with_related()
-        context["entries"] = entries
-        context["totals"] = entries.totals()
+        transactions = self.object.transactions.with_related()
+        context["transactions"] = transactions
+        context["totals"] = transactions.totals()
         return context
 
 
@@ -44,5 +44,5 @@ class TagDeleteView(DeleteFormInstanceMixin, DeleteView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["entry_count"] = self.object.entries.count()
+        context["transaction_count"] = self.object.transactions.count()
         return context

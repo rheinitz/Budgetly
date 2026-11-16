@@ -14,7 +14,7 @@
                     <tr>
                         <th>Tag</th>
                         <th>Color</th>
-                        <th>Entries</th>
+                        <th>Transactions</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -25,7 +25,7 @@
                                 {% include "partials/tag_badges.html" %}
                             </td>
                             <td>{{ tag.get_color_display }}</td>
-                            <td class="amount">{{ tag.entry_count }}</td>
+                            <td class="amount">{{ tag.transaction_count }}</td>
                             <td class="text-end text-nowrap">
                                 <a class="me-2" href="{% url 'tags:edit' tag.pk %}">Edit</a>
                                 <a href="{% url 'tags:delete' tag.pk %}">Delete</a>

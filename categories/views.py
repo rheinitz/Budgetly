@@ -6,16 +6,16 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from categories.choices import Category
-from categories.forms import SubcategoryDeleteForm, SubcategoryForm
-from categories.models import Subcategory
+from categories.forms import TypeDeleteForm, TypeForm
+from categories.models import Type
 from common.mixins import DeleteFormInstanceMixin
 
 
-class SubcategoryListView(ListView):
-    model = Subcategory
+class TypeListView(ListView):
+    model = Type
 
     def get_queryset(self):
-        return super().get_queryset().annotate(entry_count=Count("entries"))
+        return super().get_queryset().annotate(transaction_count=Count("transactions"))
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -24,27 +24,27 @@ class SubcategoryListView(ListView):
         for category in Category:
             grouped[category] = []
 
-        for subcategory in self.object_list:
-            grouped[subcategory.category_choice].append(subcategory)
+        for budget_type in self.object_list:
+            grouped[budget_type.category_choice].append(budget_type)
 
         context["category_groups"] = grouped
         return context
 
 
-class SubcategoryDetailView(DetailView):
-    model = Subcategory
+class TypeDetailView(DetailView):
+    model = Type
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        entries = self.object.entries.with_related()
-        context["entries"] = entries
-        context["total"] = entries.total_amount()
+        transactions = self.object.transactions.with_related()
+        context["transactions"] = transactions
+        context["total"] = transactions.total_amount()
         return context
 
 
-class SubcategoryCreateView(CreateView):
-    model = Subcategory
-    form_class = SubcategoryForm
+class TypeCreateView(CreateView):
+    model = Type
+    form_class = TypeForm
 
     def get_initial(self) -> dict[str, Any]:
         initial = super().get_initial()
@@ -54,27 +54,27 @@ class SubcategoryCreateView(CreateView):
         return initial
 
 
-class SubcategoryUpdateView(UpdateView):
-    model = Subcategory
-    form_class = SubcategoryForm
+class TypeUpdateView(UpdateView):
+    model = Type
+    form_class = TypeForm
 
 
-class SubcategoryDeleteView(DeleteFormInstanceMixin, DeleteView):
-    model = Subcategory
-    form_class = SubcategoryDeleteForm
-    success_url = reverse_lazy("categories:list")
+class TypeDeleteView(DeleteFormInstanceMixin, DeleteView):
+    model = Type
+    form_class = TypeDeleteForm
+    success_url = reverse_lazy("types:list")
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["has_entries"] = self.object.entries.exists()
+        context["has_transactions"] = self.object.transactions.exists()
         return context
 
-    def form_valid(self, form: SubcategoryDeleteForm) -> HttpResponse:
+    def form_valid(self, form: TypeDeleteForm) -> HttpResponse:
         try:
             return super().form_valid(form)
         except RestrictedError:
             context = self.get_context_data(
                 form=form,
-                delete_error="This subcategory was not deleted because it has entries.",
+                delete_error="This type was not deleted because it has transactions.",
             )
             return self.render_to_response(context)

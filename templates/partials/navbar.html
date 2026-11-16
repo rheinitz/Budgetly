@@ -15,20 +15,20 @@
                     <a class="nav-link{% if app == 'common' and url_name == 'home' %} active{% endif %}" href="{% url 'common:home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{% if app == 'categories' %} active{% endif %}" href="{% url 'categories:list' %}">Subcategories</a>
+                    <a class="nav-link{% if app == 'transactions' and url_name == 'list' %} active{% endif %}" href="{% url 'transactions:list' %}">Transactions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% if app == 'types' %} active{% endif %}" href="{% url 'types:list' %}">Types</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link{% if app == 'tags' %} active{% endif %}" href="{% url 'tags:list' %}">Tags</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link{% if app == 'entries' and url_name == 'list' %} active{% endif %}" href="{% url 'entries:list' %}">All entries</a>
                 </li>
             </ul>
             <div class="d-flex flex-column flex-lg-row gap-2 ms-lg-auto py-2 py-lg-0">
                 <a class="btn btn-sm btn-outline-secondary theme-switch" href="{% url 'common:theme' other_theme %}?next={{ request.get_full_path|urlencode }}">
                     {% if other_theme == "light" %}Light mode{% else %}Dark mode{% endif %}
                 </a>
-                <a class="btn btn-primary" href="{% url 'entries:add' %}">Add entry</a>
+                <a class="btn btn-primary" href="{% url 'transactions:add' %}">Add transaction</a>
             </div>
         </div>
     </div>

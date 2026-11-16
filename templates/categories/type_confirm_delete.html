@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Delete {{ subcategory.name }}{% endblock %}
+{% block title %}Delete {{ type.name }}{% endblock %}
 
 {% block content %}
-    <h1>Delete {{ subcategory.name }}</h1>
+    <h1>Delete {{ type.name }}</h1>
     {% if delete_error %}
         <div class="alert alert-danger">{{ delete_error }}</div>
     {% endif %}
-    {% if has_entries %}
+    {% if has_transactions %}
         <div class="alert alert-warning">
-            This subcategory has entries, so it cannot be deleted.
-            <a href="{{ subcategory.get_absolute_url }}">View its entries</a>
+            This type has transactions, so it cannot be deleted.
+            <a href="{{ type.get_absolute_url }}">View its transactions</a>
         </div>
     {% else %}
-        <div class="alert alert-danger">This subcategory will be removed.</div>
+        <div class="alert alert-danger">This type will be removed.</div>
     {% endif %}
     <section class="card page-card">
         <div class="card-body">
@@ -21,10 +21,10 @@
                 {% csrf_token %}
                 {% include "partials/form_fields.html" %}
                 <div class="d-flex flex-wrap align-items-center gap-3">
-                    {% if not has_entries %}
+                    {% if not has_transactions %}
                         <button class="btn btn-danger" type="submit">Delete</button>
                     {% endif %}
-                    <a href="{{ subcategory.get_absolute_url }}">Cancel</a>
+                    <a href="{{ type.get_absolute_url }}">Cancel</a>
                 </div>
             </form>
         </div>

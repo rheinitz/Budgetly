@@ -7,11 +7,11 @@
     <h1>{{ month_start|date:"F Y" }}</h1>
     {% include "partials/month_nav.html" %}
     {% totals_cards totals %}
-    {% if entries %}
-        {% include "partials/entries_table.html" %}
+    {% if transactions %}
+        {% include "partials/transactions_table.html" %}
     {% else %}
         {% with month_name=month_start|date:"F Y" %}
-            {% include "partials/empty_state.html" with message="No entries in "|add:month_name|add:"." %}
+            {% include "partials/empty_state.html" with message="No transactions in "|add:month_name|add:"." %}
         {% endwith %}
     {% endif %}
 {% endblock %}

@@ -5,8 +5,8 @@
 {% block content %}
     <h1>Delete {{ tag.name }}</h1>
     <div class="alert alert-warning">
-        {{ entry_count }} entr{{ entry_count|pluralize:"y,ies" }} will lose this tag.
-        The entries themselves stay.
+        {{ transaction_count }} transaction{{ transaction_count|pluralize }} will lose this tag.
+        The transactions themselves stay.
     </div>
     <section class="card page-card">
         <div class="card-body">

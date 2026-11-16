@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load budgie_tags %}
+
+{% block title %}{{ transaction.date|date:"d M Y" }} - {{ transaction.type.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ transaction.date|date:"d M Y" }}</h1>
+    <p>
+        <span class="badge text-bg-{{ transaction.category.badge_color }}">{{ transaction.category.label }}</span>
+    </p>
+    <section class="card page-card mb-3">
+        <div class="card-body">
+            <dl class="detail-list">
+                <dt>Amount</dt>
+                <dd class="amount">{{ transaction.amount|money }}</dd>
+                <dt>Type</dt>
+                <dd><a href="{{ transaction.type.get_absolute_url }}">{{ transaction.type.name }}</a></dd>
+                <dt>Description</dt>
+                <dd>{{ transaction.description|capfirst|default:"-" }}</dd>
+                <dt>Tags</dt>
+                <dd>
+                    {{ transaction.tags.all|join:", "|default:"-" }}
+                    {% include "partials/tag_badges.html" with tags=transaction.tags.all %}
+                </dd>
+                <dt>Created</dt>
+                <dd>{{ transaction.created_at|date:"d M Y, H:i" }}</dd>
+                <dt>Updated</dt>
+                <dd>{{ transaction.updated_at|date:"d M Y, H:i" }}</dd>
+            </dl>
+        </div>
+    </section>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <a class="btn btn-primary" href="{% url 'transactions:edit' transaction.pk %}">Edit</a>
+        <a class="btn btn-outline-danger" href="{% url 'transactions:delete' transaction.pk %}">Delete</a>
+        <a class="ms-2" href="{{ transaction.get_month_url }}">Back to {{ transaction.date|date:"F Y" }}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load budgie_tags %}
+
+{% block title %}{{ type.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ type.name }}</h1>
+    <p>
+        <span class="badge text-bg-{{ type.category_choice.badge_color }}">
+            {{ type.get_category_display }}
+        </span>
+    </p>
+    <section class="card page-card mb-4">
+        <div class="card-body">
+            <dl class="detail-list">
+                <dt>Category</dt>
+                <dd>{{ type.get_category_display }}</dd>
+                <dt>Name</dt>
+                <dd>{{ type.name }}</dd>
+                <dt>Created</dt>
+                <dd>{{ type.created_at|date:"d M Y, H:i" }}</dd>
+                <dt>Updated</dt>
+                <dd>{{ type.updated_at|date:"d M Y, H:i" }}</dd>
+                <dt>Total</dt>
+                <dd class="amount">{{ total|money }}</dd>
+            </dl>
+        </div>
+    </section>
+    {% if transactions %}
+        {% include "partials/transactions_table.html" %}
+    {% else %}
+        <div class="mb-3">
+            {% url 'transactions:add' as add_url %}
+            {% include "partials/empty_state.html" with message="No transactions yet." link_url=add_url link_label="Add transaction" %}
+        </div>
+    {% endif %}
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <a class="btn btn-primary" href="{% url 'types:edit' type.pk %}">Edit</a>
+        <a class="btn btn-outline-danger" href="{% url 'types:delete' type.pk %}">Delete</a>
+    </div>
+{% endblock %}

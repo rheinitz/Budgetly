@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}{% if object %}Edit entry{% else %}Add entry{% endif %}{% endblock %}
+{% block title %}{% if object %}Edit transaction{% else %}Add transaction{% endif %}{% endblock %}
 
 {% block content %}
-    <h1>{% if object %}Edit entry{% else %}Add entry{% endif %}</h1>
-    {% if not object and not has_subcategories %}
-        {% url 'categories:add' as add_url %}
-        {% include "partials/empty_state.html" with message="Create a subcategory before adding an entry." link_url=add_url link_label="Add a subcategory" %}
+    <h1>{% if object %}Edit transaction{% else %}Add transaction{% endif %}</h1>
+    {% if not object and not has_types %}
+        {% url 'types:add' as add_url %}
+        {% include "partials/empty_state.html" with message="Create a type before adding a transaction." link_url=add_url link_label="Add a type" %}
     {% else %}
         <section class="card page-card">
             <div class="card-body">
@@ -19,7 +19,7 @@
                         {% if object %}
                             <a href="{{ object.get_absolute_url }}">Cancel</a>
                         {% else %}
-                            <a href="{% url 'entries:current' %}">Cancel</a>
+                            <a href="{% url 'transactions:current' %}">Cancel</a>
                         {% endif %}
                     </div>
                 </form>

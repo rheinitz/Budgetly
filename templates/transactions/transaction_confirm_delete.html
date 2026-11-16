@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Delete {{ entry }}{% endblock %}
+{% block title %}Delete {{ transaction }}{% endblock %}
 
 {% block content %}
-    <h1>Delete {{ entry }}</h1>
-    <div class="alert alert-danger">This entry will be removed.</div>
+    <h1>Delete {{ transaction }}</h1>
+    <div class="alert alert-danger">This transaction will be removed.</div>
     <section class="card page-card">
         <div class="card-body">
             <form method="post">
@@ -12,7 +12,7 @@
                 {% include "partials/form_fields.html" %}
                 <div class="d-flex flex-wrap align-items-center gap-3">
                     <button class="btn btn-danger" type="submit">Delete</button>
-                    <a href="{{ entry.get_absolute_url }}">Cancel</a>
+                    <a href="{{ transaction.get_absolute_url }}">Cancel</a>
                 </div>
             </form>
         </div>

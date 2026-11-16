@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Subcategories{% endblock %}
+{% block title %}Types{% endblock %}
 
 {% block content %}
-    <h1 class="mb-3">Subcategories</h1>
+    <h1 class="mb-3">Types</h1>
     <div class="row row-cols-1 row-cols-lg-2 g-3">
-        {% for category, subcategories in category_groups.items %}
+        {% for category, types in category_groups.items %}
             <div class="col">
                 <section class="card page-card h-100">
                     <div class="card-body">
@@ -13,22 +13,22 @@
                             <h2 class="h5 mb-0">
                                 <span class="badge text-bg-{{ category.badge_color }}">{{ category.label }}</span>
                             </h2>
-                            {% url 'categories:add' as add_url %}
+                            {% url 'types:add' as add_url %}
                             <a href="{{ add_url }}?category={{ category.value }}">Add to {{ category.label }}</a>
                         </div>
-                        {% if subcategories %}
+                        {% if types %}
                             <ul class="list-unstyled sub-list mb-0">
-                                {% for subcategory in subcategories %}
+                                {% for type in types %}
                                     <li>
-                                        <a href="{{ subcategory.get_absolute_url }}">{{ subcategory.name }}</a>
+                                        <a href="{{ type.get_absolute_url }}">{{ type.name }}</a>
                                         <span class="text-body-secondary">
-                                            {{ subcategory.entry_count }} entr{{ subcategory.entry_count|pluralize:"y,ies" }}
+                                            {{ type.transaction_count }} transaction{{ type.transaction_count|pluralize }}
                                         </span>
                                     </li>
                                 {% endfor %}
                             </ul>
                         {% else %}
-                            {% include "partials/empty_state.html" with message="No subcategories yet." %}
+                            {% include "partials/empty_state.html" with message="No types yet." %}
                         {% endif %}
                     </div>
                 </section>

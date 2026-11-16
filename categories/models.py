@@ -7,7 +7,7 @@ from categories.choices import Category
 from common.models import TimeStampMixin
 
 
-class Subcategory(TimeStampMixin):
+class Type(TimeStampMixin):
     category = models.CharField(max_length=20, choices=Category.choices)
     name = models.CharField(
         max_length=40,
@@ -19,7 +19,8 @@ class Subcategory(TimeStampMixin):
     class Meta:
         ordering = ["category", "name"]
         unique_together = [("category", "name")]
-        verbose_name_plural = "subcategories"
+        verbose_name = "type"
+        verbose_name_plural = "types"
 
     def __str__(self) -> str:
         return f"{self.get_category_display()} - {self.name}"
@@ -30,12 +31,12 @@ class Subcategory(TimeStampMixin):
             return
 
         lowered_name = self.name.lower()
-        others = Subcategory.objects.filter(category=self.category).exclude(pk=self.pk)
+        others = Type.objects.filter(category=self.category).exclude(pk=self.pk)
         if any(other.name.lower() == lowered_name for other in others):
             raise ValidationError(
                 {
                     "name": (
-                        "A subcategory with this name already exists in "
+                        "A type with this name already exists in "
                         f"{self.get_category_display()}."
                     ),
                 }
@@ -46,4 +47,4 @@ class Subcategory(TimeStampMixin):
         return Category(self.category)
 
     def get_absolute_url(self) -> str:
-        return reverse("categories:detail", kwargs={"pk": self.pk})
+        return reverse("types:detail", kwargs={"pk": self.pk})

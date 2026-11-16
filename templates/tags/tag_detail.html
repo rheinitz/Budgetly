@@ -25,11 +25,11 @@
         </div>
     </section>
     {% totals_cards totals %}
-    {% if entries %}
-        {% include "partials/entries_table.html" %}
+    {% if transactions %}
+        {% include "partials/transactions_table.html" %}
     {% else %}
         <div class="mb-3">
-            {% include "partials/empty_state.html" with message="No entries use this tag." %}
+            {% include "partials/empty_state.html" with message="No transactions use this tag." %}
         </div>
     {% endif %}
     <div class="d-flex flex-wrap align-items-center gap-2">
