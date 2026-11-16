@@ -42,6 +42,9 @@ ALLOWED_HOSTS = [
 
 # Application definition
 
+# Apps from packages outside Django and this project.
+THIRD_PARTY_APPS = []
+
 # Django's built-in apps.
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -60,8 +63,7 @@ LOCAL_APPS = [
     "transactions",
 ]
 
-# Django apps, then local apps
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -157,3 +159,4 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
+
