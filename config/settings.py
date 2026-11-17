@@ -55,7 +55,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-# Add project apps here
+# Apps that belong to this project.
 LOCAL_APPS = [
     "common",
     "categories",
