@@ -1,20 +1,15 @@
-<p align="center">
-  <img src="static/images/favicon.png" alt="Budgie logo" width="96">
-</p>
+<h1><img src="static/images/favicon.png" alt="" width="48"> BUDGIE</h1>
 
-<h1 align="center">Budgie</h1>
-
-<p align="center">
-  A monthly budget tracker built with Django.<br>
-  One month. Four categories. Nowhere to hide.
-</p>
-
-<p align="center">
+<p>
   <img src="https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white" alt="Python 3.12">
   <img src="https://img.shields.io/badge/django-6.1-092E20?logo=django&logoColor=white" alt="Django 6.1">
   <img src="https://img.shields.io/badge/bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white" alt="Bootstrap 5.3">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license"></a>
 </p>
+
+## Introduction
+
+Budgie tracks a budget one month at a time. Every amount belongs to one of four categories — Income, Expenses, Savings or Investments — and the month page turns them into totals, a net figure and a savings rate.
 
 ![Budgie demo](docs/screenshots/demo.gif)
 
@@ -35,7 +30,7 @@ Create **types** such as Salary, Groceries or ETF, each inside one of four fixed
 ## Quick Start
 
 ```bash
-git clone https://github.com/rheinitz/Budgie.git && cd Budgie
+git clone https://github.com/rheinitz/budgie.git && cd budgie
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate

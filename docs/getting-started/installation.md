@@ -9,8 +9,8 @@ Budgie needs Python 3.12 and Git. It uses SQLite, so there is no database server
 **Linux / macOS**
 
 ```bash
-git clone https://github.com/rheinitz/Budgie.git
-cd Budgie
+git clone https://github.com/rheinitz/budgie.git
+cd budgie
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -19,8 +19,8 @@ pip install -r requirements.txt
 **Windows (PowerShell)**
 
 ```powershell
-git clone https://github.com/rheinitz/Budgie.git
-cd Budgie
+git clone https://github.com/rheinitz/budgie.git
+cd budgie
 py -m venv venv
 venv\Scripts\Activate.ps1
 pip install -r requirements.txt

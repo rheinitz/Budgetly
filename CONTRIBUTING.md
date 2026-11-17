@@ -8,7 +8,7 @@ Follow the [installation guide](docs/getting-started/installation.md), then read
 
 ## Reporting Bugs and Ideas
 
-Open an [issue](https://github.com/rheinitz/Budgie/issues) and include:
+Open an [issue](https://github.com/rheinitz/budgie/issues) and include:
 
 - what you did, what you expected, and what happened;
 - the page URL, and a screenshot if it is visual;
@@ -79,4 +79,4 @@ Then check by hand:
 
 ## Contributors
 
-Budgie is maintained by [@rheinitz](https://github.com/rheinitz). Everyone who has contributed is listed on the [contributors page](https://github.com/rheinitz/Budgie/graphs/contributors).
+Budgie is maintained by [@rheinitz](https://github.com/rheinitz). Everyone who has contributed is listed on the [contributors page](https://github.com/rheinitz/budgie/graphs/contributors).
