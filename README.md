@@ -18,9 +18,9 @@
 
 ![Budgie demo](docs/screenshots/demo.gif)
 
-## How it works
+## How It Works
 
-Create **types** such as Salary, Groceries or ETF, each inside one of four fixed **categories**: income, expenses, savings and investments. Log **transactions** against them, optionally with **tags** like `summer-trip`. Each month page then shows the totals, the net amount and your savings rate.
+Create **types** such as Salary, Groceries or ETF, each inside one of four fixed **categories**: Income, Expenses, Savings and Investments. Log **transactions** against them, optionally with **tags** like `summer-trip`. Each month page then shows the totals, the net amount and your savings rate.
 
 - Monthly totals, net and savings rate, with previous and next month navigation
 - Tags that group spending across categories and months
@@ -32,11 +32,11 @@ Create **types** such as Salary, Groceries or ETF, each inside one of four fixed
 | --- | --- | --- |
 | ![Month page](docs/screenshots/month.png) | ![All transactions](docs/screenshots/transactions.png) | ![Light theme](docs/screenshots/month-light.png) |
 
-## Quick start
+## Quick Start
 
 ```bash
 git clone https://github.com/rheinitz/Budgie.git && cd Budgie
-python3 -m venv .venv && source .venv/bin/activate
+python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
@@ -48,9 +48,9 @@ Open <http://127.0.0.1:8000/>. The app needs no `.env` file and starts with an e
 
 | | |
 | --- | --- |
-| [Getting started](docs/getting-started/installation.md) | Installation, configuration and the [user guide](docs/getting-started/user-guide.md) |
-| [Architecture](docs/architecture/overview.md) | Apps, the [data model](docs/architecture/data-model.md), and [URLs, views and templates](docs/architecture/urls-and-views.md) |
-| [Development](docs/development/code-guide.md) | Code conventions and the [exam requirements](docs/development/requirements.md) mapping |
+| [Getting Started](docs/getting-started/installation.md) | Installation, configuration and the [User Guide](docs/getting-started/user-guide.md) |
+| [Architecture](docs/architecture/overview.md) | Apps, the [Data Model](docs/architecture/data-model.md), and [URLs, Views and Templates](docs/architecture/urls-and-views.md) |
+| [Development](docs/development/code-guide.md) | Code conventions and where to add a feature |
 | [All docs](docs/README.md) | The full index and every screenshot |
 
 ## Contributing

@@ -1,6 +1,6 @@
-# Data model
+# Data Model
 
-[Docs home](../README.md) · Previous: [Overview](overview.md) · Next: [URLs, views and templates](urls-and-views.md)
+[Docs home](../README.md) · Previous: [Overview](overview.md) · Next: [URLs, Views and Templates](urls-and-views.md)
 
 ## Relations
 
@@ -88,7 +88,7 @@ Ordered newest first (`-date`, `-created_at`). The `category` property returns t
 
 `totals_by_category()` calls `.order_by()` first. Without it, a sorted list would add the sort field to the `GROUP BY` and split the groups.
 
-## How totals are calculated
+## How Totals Are Calculated
 
 `CategoryTotals` in `transactions/totals.py` exposes the four sums plus:
 

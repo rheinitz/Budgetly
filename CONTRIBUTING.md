@@ -2,11 +2,11 @@
 
 Thanks for taking the time to help. This guide covers setup, the project rules, and what a pull request needs before review.
 
-## Getting set up
+## Getting Set Up
 
-Follow the [installation guide](docs/getting-started/installation.md), then read the [architecture overview](docs/architecture/overview.md) and the [code guide](docs/development/code-guide.md). They explain where things live and which mixins to reuse.
+Follow the [installation guide](docs/getting-started/installation.md), then read the [Architecture Overview](docs/architecture/overview.md) and the [Code Guide](docs/development/code-guide.md). They explain where things live and which mixins to reuse.
 
-## Reporting bugs and ideas
+## Reporting Bugs and Ideas
 
 Open an [issue](https://github.com/rheinitz/Budgie/issues) and include:
 
@@ -14,14 +14,13 @@ Open an [issue](https://github.com/rheinitz/Budgie/issues) and include:
 - the page URL, and a screenshot if it is visual;
 - your OS and Python version for setup problems.
 
-## Project rules
+## Project Rules
 
 These keep the project within its scope. Please discuss before breaking one.
 
 - **The database stays empty.** No fixtures, data migrations or seed scripts. Everything is created through the UI.
 - **No custom JavaScript.** Only the Bootstrap bundle. Interactions use links and forms.
 - **No new packages** beyond those in `requirements.txt` without agreement in an issue first.
-- **No authentication.** Budgie has no login, logout or registration.
 - **Never commit** `.env`, `db.sqlite3`, the virtual environment or local notes.
 
 ## Branches
@@ -49,11 +48,11 @@ docs: add architecture overview
 
 Keep each commit to one logical change. Stage explicit paths and check `git status` before committing.
 
-## Code style
+## Code Style
 
-The [code guide](docs/development/code-guide.md#conventions) lists the conventions. In short: PEP 8, type hints everywhere, class-based views, explicit form `fields`, `Decimal` from strings, and `{% url %}` instead of hard-coded paths.
+The [Code Guide](docs/development/code-guide.md#conventions) lists the conventions. In short: PEP 8, type hints everywhere, class-based views, explicit form `fields`, `Decimal` from strings, and `{% url %}` instead of hard-coded paths.
 
-## Before you open a pull request
+## Before You Open a Pull Request
 
 Run these from the project root with the virtual environment active:
 
@@ -71,7 +70,7 @@ Then check by hand:
 4. After deleting `db.sqlite3` and running `migrate`, the empty states make sense.
 5. If the change is visible, update the screenshots in [`docs/screenshots/`](docs/screenshots/) and the docs that mention it.
 
-## Pull requests
+## Pull Requests
 
 - Target `main` and keep the PR focused on one change.
 - Describe what changed and why, and how you tested it.

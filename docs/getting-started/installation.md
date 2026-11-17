@@ -1,18 +1,18 @@
 # Installation
 
-[Docs home](../README.md) · Next: [User guide](user-guide.md)
+[Docs home](../README.md) · Next: [User Guide](user-guide.md)
 
 Budgie needs Python 3.12 and Git. It uses SQLite, so there is no database server to install. Bootstrap and Google Fonts load from their CDNs, so the pages need internet access to look right.
 
-## 1. Clone and install
+## 1. Clone and Install
 
 **Linux / macOS**
 
 ```bash
 git clone https://github.com/rheinitz/Budgie.git
 cd Budgie
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -21,12 +21,12 @@ pip install -r requirements.txt
 ```powershell
 git clone https://github.com/rheinitz/Budgie.git
 cd Budgie
-py -m venv .venv
-.venv\Scripts\Activate.ps1
+py -m venv venv
+venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
-## 2. Environment variables (optional)
+## 2. Environment Variables (Optional)
 
 The app runs without a `.env` file. Every setting has a safe local default. To change one, copy the example file and edit it:
 
@@ -42,18 +42,18 @@ cp .env.example .env        # Windows: copy .env.example .env
 
 Keep the quotes around `SECRET_KEY` in `.env`. An unquoted `#` or `$` breaks the value. `.env` is git-ignored and must never be committed.
 
-## 3. Create the database and run
+## 3. Create the Database and Run
 
 ```bash
 python manage.py migrate
 python manage.py runserver
 ```
 
-Open <http://127.0.0.1:8000/>. The database starts empty on purpose: everything is created through the UI. Continue with the [user guide](user-guide.md).
+Open <http://127.0.0.1:8000/>. The database starts empty on purpose: everything is created through the UI. Continue with the [User Guide](user-guide.md).
 
 The Django admin is registered for all three models, but the app never needs it. To use it anyway, run `python manage.py createsuperuser` and open `/admin/`.
 
-## Viewing the custom 404 page
+## Viewing the Custom 404 Page
 
 Django shows its own debug page while `DEBUG` is on. To see Budgie's 404 page:
 

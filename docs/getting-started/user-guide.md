@@ -1,10 +1,10 @@
-# User guide
+# User Guide
 
-[Docs home](../README.md) · Previous: [Installation](installation.md) · Next: [Architecture overview](../architecture/overview.md)
+[Docs home](../README.md) · Previous: [Installation](installation.md) · Next: [Architecture Overview](../architecture/overview.md)
 
 Budgie tracks one month at a time. Every amount you enter lands in one of four fixed **categories**, and the month page turns them into totals, a net figure and a savings rate.
 
-## Three ideas
+## Three Ideas
 
 | Idea | What it is | Examples |
 | --- | --- | --- |
@@ -14,7 +14,7 @@ Budgie tracks one month at a time. Every amount you enter lands in one of four f
 
 Amounts are always positive. A 50 € grocery bill and a 50 € salary are both entered as `50.00`; the type's category decides whether the money came in or went out.
 
-## First steps
+## First Steps
 
 Every step below starts from a link in the navbar or on the home page.
 
@@ -25,23 +25,23 @@ Every step below starts from a link in the navbar or on the home page.
 
 ![Adding a transaction](../screenshots/transaction-form.png)
 
-## The month page
+## The Month Page
 
 ![Month page](../screenshots/month.png)
 
 | Card | Meaning |
 | --- | --- |
 | Income, Expenses, Savings, Investments | Sum of the month's transactions in each category |
-| Net | Income minus expenses, savings and investments. Shown in red when negative. |
-| Savings rate | (Savings + investments) / income, as a percentage. A dash when there is no income. |
+| Net | Income minus Expenses, Savings and Investments. Shown in red when negative. |
+| Savings rate | (Savings + Investments) / Income, as a percentage. A dash when there is no Income. |
 
-The bar below the cards shows how income was split between expenses, savings and investments.
+The bar below the cards shows how Income was split between Expenses, Savings and Investments.
 
-## All transactions
+## All Transactions
 
 **Transactions** in the navbar lists every transaction with filters for text (description or type name), category, tag and a date range, plus sorting and 10, 20, 50 or 100 rows per page. Pagination keeps the filters in the URL, so a filtered page can be bookmarked.
 
-The cards above the list total **only the rows that match the filter**. With only expenses selected, income is 0, so net is negative and the savings rate is a dash. That is expected.
+The cards above the list total **only the rows that match the filter**. With only Expenses selected, Income is 0, so Net is negative and the Savings rate is a dash. That is expected.
 
 ![All transactions](../screenshots/transactions.png)
 
@@ -51,7 +51,7 @@ A tag's page lists every transaction carrying it, across all months, with the sa
 
 ![Tag detail](../screenshots/tag-detail.png)
 
-## Editing and deleting
+## Editing and Deleting
 
 Every type, tag and transaction has Edit and Delete links on its detail page. Each delete goes through a confirmation page that shows the record in read-only fields.
 
@@ -73,7 +73,7 @@ Mistakes are caught on the server and shown next to the field:
 
 ![Validation errors](../screenshots/form-errors.png)
 
-## Light and dark theme
+## Light and Dark Theme
 
 The button in the navbar switches themes and keeps you on the same page. The choice is stored in a cookie for a year. Dark is the default.
 

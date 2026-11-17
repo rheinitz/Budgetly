@@ -1,6 +1,6 @@
-# Code guide
+# Code Guide
 
-[Docs home](../README.md) · Previous: [URLs, views and templates](../architecture/urls-and-views.md) · Next: [Exam requirements](requirements.md)
+[Docs home](../README.md) · Previous: [URLs, Views and Templates](../architecture/urls-and-views.md)
 
 How the code is organized and the conventions new code should follow. For the workflow (branches, commits, pull requests), see [CONTRIBUTING](../../CONTRIBUTING.md).
 
@@ -17,7 +17,7 @@ How the code is organized and the conventions new code should follow. For the wo
 - **Avoid shadowing built-ins.** A loop over types uses `budget_type`, not `type`.
 - **Comments are short** and only explain what the code cannot show.
 
-## Reusable pieces
+## Reusable Pieces
 
 | Piece | File | What it does |
 | --- | --- | --- |
@@ -50,7 +50,7 @@ class TypeDeleteForm(DisabledFieldsMixin, TypeForm):
 
 Every form sets labels, placeholders where useful, help texts and custom error messages in `Meta`. The shared `partials/form_fields.html` renders fields, help text and errors the same way everywhere.
 
-## Theme switch without JavaScript
+## Theme Switch without JavaScript
 
 ```mermaid
 sequenceDiagram
@@ -86,7 +86,7 @@ Section comments in the CSS use one block style:
 */
 ```
 
-## Adding a feature
+## Adding a Feature
 
 1. Put the model rules in the model, and query logic in `TransactionQuerySet` if it touches transactions.
 2. Run `python manage.py makemigrations` and commit the migration with the model change.

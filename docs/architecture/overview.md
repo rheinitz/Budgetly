@@ -1,6 +1,6 @@
-# Architecture overview
+# Architecture Overview
 
-[Docs home](../README.md) · Next: [Data model](data-model.md)
+[Docs home](../README.md) · Next: [Data Model](data-model.md)
 
 Budgie is a server-rendered Django project. Every page is an HTML template, every change is a regular form POST, and the only JavaScript is the Bootstrap bundle that powers the mobile navbar.
 
@@ -40,7 +40,7 @@ flowchart LR
 - `categories` and `tags` never import `transactions`. They reach transactions through the reverse relation `related_name="transactions"`, for example `tag.transactions.totals()`.
 - Reverse managers are built from `Transaction`'s default manager, so every `TransactionQuerySet` method works on them without an import.
 
-## Request flow
+## Request Flow
 
 Example: `GET /transactions/2026/11/`.
 
@@ -67,7 +67,7 @@ sequenceDiagram
 5. `get_context_data()` adds the totals and the previous and next months.
 6. Rendering the table runs one JOIN for the types and one query for the tags. The page needs about three queries no matter how many transactions the month has.
 
-## Project layout
+## Project Layout
 
 ```text
 Budgie/

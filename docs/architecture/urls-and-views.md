@@ -1,6 +1,6 @@
-# URLs, views and templates
+# URLs, Views and Templates
 
-[Docs home](../README.md) · Previous: [Data model](data-model.md) · Next: [Code guide](../development/code-guide.md)
+[Docs home](../README.md) · Previous: [Data Model](data-model.md) · Next: [Code Guide](../development/code-guide.md)
 
 Every link is reversed by name, for example `{% url 'types:detail' type.pk %}` or `get_absolute_url()`. No internal URL is hard-coded.
 
@@ -32,7 +32,7 @@ Every link is reversed by name, for example `{% url 'types:detail' type.pk %}` o
 
 The `categories` app is mounted at `/types/` with the URL namespace `types`, because the pages manage types. The four categories themselves have no pages.
 
-## View behavior worth knowing
+## View Behavior Worth Knowing
 
 - **Redirect after success.** Types and tags redirect to their detail page through `get_absolute_url()`. Transactions redirect to the month they belong to through `TransactionMonthRedirectMixin`, so the new row and the updated totals are visible right away.
 - **Delete confirmations reuse the model forms** with every field disabled (`DisabledFieldsMixin`). `DeleteFormInstanceMixin` passes `instance=self.object` to the form, so the fields show the record and uniqueness checks do not report it as its own duplicate.
