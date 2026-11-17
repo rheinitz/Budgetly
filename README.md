@@ -9,7 +9,7 @@
 
 ## Introduction
 
-Budgie tracks a budget one month at a time. Every amount belongs to one of four categories — Income, Expenses, Savings or Investments — and the month page turns them into totals, a net figure and a savings rate.
+Budgie tracks a budget one month at a time. Every amount belongs to one of four categories - Income, Expenses, Savings or Investments - and the month page turns them into totals, a net figure and a savings rate.
 
 ![Budgie demo](docs/screenshots/demo.gif)
 
